@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page</title>
+    <link rel="stylesheet" href="{% static 'core/landing.css' %}">
+</head>
+
+<body>
+    <div class="header">
+        <h2 class="logo-name">HotelPro</h2>
+        <nav class="nav-bar">
+            <a href="" class="nav-link">features</a>
+            <a href="" class="nav-link">how it works</a>
+            <a href="" class="nav-link">review</a>
+        </nav>
+        <form action="{% url 'signup' %}" method="get">
+            <button type="submit" class="get-start-btn">
+                Get Started
+            </button>
+        </form>
+    </div>
+</body>
+
+</html>

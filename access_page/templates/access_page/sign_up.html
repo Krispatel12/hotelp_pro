@@ -1,19 +1,180 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
 </head>
 <body>
+<form method="post" id="registration-form">
+    {% csrf_token %}
 
     <h2>Sign Up</h2>
 
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Register</button>
-    </form>
+    <!-- STEP 1 -->
+    <div id="step-1">
+        <button type="button" class="back-btn">
+            <a href="{% url 'landing' %}">Back to Landing Page</a>
+        </button>
 
+        {{ form.auth_type.label_tag }}
+        {{ form.auth_type }}
+        {{ form.auth_type.errors }}
+
+        {{ form.username.label_tag }}
+        {{ form.username }}
+        {{ form.username.errors }}
+
+        <div id="email-field" style="display:none">
+            {{ form.email.label_tag }}
+            {{ form.email }}
+            {{ form.email.errors }}
+        </div>
+
+        <div id="phone-field" style="display:none">
+            {{ form.phone_number.label_tag }}
+            {{ form.phone_number }}
+            {{ form.phone_number.errors }}
+        </div>
+
+        <button type="button" onclick="sendOtp()">Send OTP</button>
+    </div>
+
+    <!-- STEP 2 -->
+    <div id="step-2" style="display:none">
+        <button type="button" class="back-btn" onclick="goBack(1)">Back</button>
+
+        {{ form.otp_verification.label_tag }}
+        {{ form.otp_verification }}
+        {{ form.otp_verification.errors }}
+
+        <button type="button" onclick="verifyOtp()">Verify OTP</button>
+
+        <button type="button" id="resend-btn" onclick="resendOTP()">Resend OTP</button>
+        <div id="timer">Resend OTP in <span id="time">30</span>s</div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div id="step-3" style="display:none">
+        <button type="button" class="back-btn" onclick="goBack(2)">Back</button>
+
+        {{ form.password.label_tag }}
+        {{ form.password }}
+        {{ form.password.errors }}
+
+        {{ form.confirm_password.label_tag }}
+        {{ form.confirm_password }}
+        {{ form.confirm_password.errors }}
+
+        <button type="submit">Register</button>
+    </div>
+</form>
+
+<script>
+const authType = document.getElementById("id_auth_type");
+const emailField = document.getElementById("email-field");
+const phoneField = document.getElementById("phone-field");
+const resendBtn = document.getElementById("resend-btn");
+const timerDiv = document.getElementById("timer");
+const timerSpan = document.getElementById("time");
+
+// Show correct field for auth type
+authType.addEventListener("change", () => {
+    emailField.style.display = authType.value === "email" ? "block" : "none";
+    phoneField.style.display = authType.value === "phone" ? "block" : "none";
+});
+window.onload = () => authType.dispatchEvent(new Event("change"));
+
+function sendOtp() {
+    let email = document.getElementById('id_email').value;
+
+    if(!email){
+        alert("Please enter email");
+        return;
+    }
+
+    fetch(`/sign-up/send-email-otp/?email=${email}`)
+        .then(res => res.json())
+        .then(data => {
+            alert(data.message);
+            document.getElementById('step-1').style.display='none';
+            document.getElementById('step-2').style.display='block';
+            startTimer();
+        })
+        .catch(err => console.error(err));
+}
+
+let otpTimer;
+let timeLeft = 30;
+function startTimer(){
+    timeLeft = 30;
+    resendBtn.style.display = "none";
+    timerDiv.style.display = "block";
+    timerSpan.innerText = timeLeft;
+    timerDiv.style.color = "#2575fc"; // default blue for entire div
+
+    otpTimer = setInterval(() => {
+        timeLeft--;
+        timerSpan.innerText = timeLeft;
+
+        // Change entire timer color when 10s or less
+        if(timeLeft <= 10){
+            timerDiv.style.color = "#e74c3c"; // red
+        } else {
+            timerDiv.style.color = "#2575fc"; // blue
+        }
+
+        if(timeLeft <= 0){
+            clearInterval(otpTimer);
+            timerDiv.style.display = "none";
+            resendBtn.style.display = "block";
+        }
+    }, 1000);
+}
+
+
+function resendOTP(){
+    let email = document.getElementById('id_email').value;
+    fetch(`/sign-up/send-email-otp/?email=${email}`)
+        .then(res => res.json())
+        .then(data => {
+            alert(data.message);
+            startTimer();
+        })
+        .catch(err => console.error(err));
+}
+
+
+function verifyOtp() {
+    let enteredOtp = document.getElementById('id_otp_verification').value;
+    let email = document.getElementById('id_email').value;
+
+    fetch(`/sign-up/verify-email-otp/?email=${email}&otp=${enteredOtp}`)
+        .then(res => res.json())
+        .then(data => {
+            if(data.status === "success"){
+                alert("OTP verified!");
+                document.getElementById("step-2").style.display = "none";
+                document.getElementById("step-3").style.display = "block";
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(err => console.error(err));
+}
+
+
+function goBack(step){
+    if(step === 1){
+        document.getElementById("step-2").style.display="none";
+        document.getElementById("step-1").style.display="block";
+    }
+    if(step === 2){
+        document.getElementById("step-3").style.display="none";
+        document.getElementById("step-2").style.display="block";
+    }
+}
+</script>
 </body>
 </html>

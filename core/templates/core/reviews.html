@@ -1,0 +1,127 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Reviews - HotelPro{% endblock %}
+
+{% block content %}
+<section class="py-20 bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 min-h-screen">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 fade-in-up">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4">
+                User <span class="gradient-text">Reviews</span>
+            </h1>
+            <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+                See what our users are saying about their experience with HotelPro.
+            </p>
+        </div>
+
+        <!-- Reviews Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+            {% if reviews %}
+            {% for review in reviews %}
+            <div class="glass-card testimonial-card p-8 rounded-2xl relative">
+                <div class="flex items-center mb-6">
+                    <div
+                        class="w-12 h-12 rounded-full bg-gradient-to-r from-blue-400 to-blue-600 flex items-center justify-center text-white font-bold text-xl shadow-md">
+                        {{ review.name|slice:":1"|upper }}
+                    </div>
+                    <div class="ml-4">
+                        <h4 class="text-lg font-bold text-gray-900 dark:text-white">{{ review.name }}</h4>
+                        <div class="flex text-yellow-400 text-sm">
+                            {% for i in "12345"|make_list %}
+                            {% if forloop.counter <= review.rating|add:"0" %} <i class="fas fa-star"></i>
+                                {% else %}
+                                <i class="far fa-star text-gray-300"></i>
+                                {% if forloop.counter == review.rating|add:"0.5" %}<i
+                                    class="fas fa-star-half-alt absolute"></i>{% endif %}
+                                {% endif %}
+                                {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <i
+                        class="fas fa-quote-left absolute -top-2 -left-2 text-4xl text-blue-100 dark:text-gray-700 -z-10"></i>
+                    <p class="text-gray-600 dark:text-gray-300 italic relative z-10 pl-4">
+                        "{{ review.comment }}"
+                    </p>
+                </div>
+                <div class="mt-6 text-sm text-gray-400 text-right">
+                    {{ review.created_at|date:"M d, Y" }}
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <div class="col-span-full text-center py-10">
+                <div class="inline-block p-6 rounded-full bg-blue-50 dark:bg-gray-800 mb-4">
+                    <i class="far fa-comment-dots text-4xl text-blue-400"></i>
+                </div>
+                <p class="text-gray-500 text-lg">No reviews yet. Be the first to share your experience!</p>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Review Form -->
+        <div class="max-w-2xl mx-auto fade-in-up delay-200">
+            <div class="glass-card p-8 sm:p-10 rounded-3xl shadow-2xl relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-500 to-purple-500"></div>
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-8 flex items-center">
+                    <i class="fas fa-pen-nib mr-3 text-blue-500"></i> Leave a Review
+                </h3>
+
+                <form method="post" action="{% url 'reviews' %}" class="space-y-6">
+                    {% csrf_token %}
+
+                    <div class="space-y-2">
+                        <label for="name"
+                            class="block text-sm font-medium text-gray-700 dark:text-gray-300">Name</label>
+                        <div class="relative rounded-md shadow-sm">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-user text-gray-400"></i>
+                            </div>
+                            <input type="text" id="name" name="name" required
+                                class="block w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 rounded-xl leading-5 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 sm:text-sm"
+                                placeholder="John Doe">
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label for="rating"
+                            class="block text-sm font-medium text-gray-700 dark:text-gray-300">Rating</label>
+                        <div class="relative rounded-md shadow-sm">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-star text-gray-400"></i>
+                            </div>
+                            <select id="rating" name="rating" required
+                                class="block w-full pl-10 pr-10 py-3 border border-gray-300 dark:border-gray-600 rounded-xl leading-5 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 sm:text-sm appearance-none cursor-pointer">
+                                <option value="5">Excellent (5 Stars)</option>
+                                <option value="4">Good (4 Stars)</option>
+                                <option value="3">Average (3 Stars)</option>
+                                <option value="2">Poor (2 Stars)</option>
+                                <option value="1">Terrible (1 Star)</option>
+                            </select>
+                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                <i class="fas fa-chevron-down text-gray-400 text-xs"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label for="comment"
+                            class="block text-sm font-medium text-gray-700 dark:text-gray-300">Comment</label>
+                        <div class="relative rounded-md shadow-sm">
+                            <textarea id="comment" name="comment" rows="4" required
+                                class="block w-full p-4 border border-gray-300 dark:border-gray-600 rounded-xl leading-5 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 sm:text-sm"
+                                placeholder="Share your experience..."></textarea>
+                        </div>
+                    </div>
+
+                    <button type="submit"
+                        class="w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-xl text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200">
+                        Submit Review
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

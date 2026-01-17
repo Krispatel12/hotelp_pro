@@ -1,28 +1,543 @@
-<!DOCTYPE html>
-{% load static %}
-<html lang="en">
+{% extends 'core/base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Landing Page</title>
-    <link rel="stylesheet" href="{% static 'core/landing.css' %}">
-</head>
+{% block title %}AI-Powered Hotel Management System | HotelPro{% endblock %}
 
-<body>
-    <div class="header">
-        <h2 class="logo-name">HotelPro</h2>
-        <nav class="nav-bar">
-            <a href="" class="nav-link">features</a>
-            <a href="" class="nav-link">how it works</a>
-            <a href="" class="nav-link">review</a>
-        </nav>
-        <form action="{% url 'signup' %}" method="get">
-            <button type="submit" class="get-start-btn">
-                Get Started
-            </button>
-        </form>
+{% block extra_css %}
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="relative overflow-hidden pt-24 pb-16 sm:pt-32 sm:pb-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="text-center lg:text-left">
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 dark:text-white leading-tight">
+                    Transform Your Hotel Management with
+                    <span class="gradient-text">AI Power</span>
+                </h1>
+                <p class="mt-6 text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto lg:mx-0">
+                    Streamline operations, enhance guest experiences, and boost your revenue with our intelligent hotel
+                    management platform powered by artificial intelligence.
+                </p>
+                <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                    <a href="{% url 'signup' %}"
+                        class="inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200">
+                        Get Started Free
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                    <a href="#features"
+                        class="inline-flex items-center justify-center px-8 py-4 border border-gray-300 dark:border-gray-600 text-base font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
+                        <i class="fas fa-play-circle mr-2"></i>
+                        Watch Demo
+                    </a>
+                </div>
+                <div class="mt-8 flex items-center justify-center lg:justify-start space-x-6">
+                    <div class="flex -space-x-2">
+                        <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white dark:ring-gray-800"
+                            src="https://randomuser.me/api/portraits/women/12.jpg" alt="User 1">
+                        <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white dark:ring-gray-800"
+                            src="https://randomuser.me/api/portraits/men/32.jpg" alt="User 2">
+                        <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white dark:ring-gray-800"
+                            src="https://randomuser.me/api/portraits/women/44.jpg" alt="User 3">
+                    </div>
+                    <div class="text-sm text-gray-600 dark:text-gray-400">
+                        <p>Trusted by <span class="font-semibold text-gray-900 dark:text-white">1000+</span> hotels
+                            worldwide</p>
+                        <div class="flex items-center mt-1">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <span class="ml-2">4.9/5 from 1,200+ reviews</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="relative">
+                <div
+                    class="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-200 dark:border-gray-700">
+                    <div class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10"></div>
+                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                        alt="Hotel Management Dashboard" class="relative w-full h-auto rounded-2xl">
+                    <div
+                        class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent rounded-b-2xl">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0">
+                                <div
+                                    class="h-12 w-12 rounded-full bg-blue-500 flex items-center justify-center text-white">
+                                    <i class="fas fa-robot text-xl"></i>
+                                </div>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm font-medium text-white">AI Assistant</p>
+                                <p class="text-xs text-blue-200">Ready to optimize your hotel operations</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Floating Elements -->
+                <div
+                    class="absolute -top-6 -left-6 w-32 h-32 bg-blue-400/20 rounded-full filter blur-3xl -z-10 animate-pulse-slow">
+                </div>
+                <div class="absolute -bottom-8 -right-8 w-40 h-40 bg-purple-400/20 rounded-full filter blur-3xl -z-10 animate-pulse-slow"
+                    style="animation-delay: 1s;"></div>
+
+                <!-- Stats Cards -->
+                <div
+                    class="absolute -bottom-6 -left-6 bg-white dark:bg-gray-800 rounded-xl p-4 shadow-lg border border-gray-100 dark:border-gray-700 w-40 transform rotate-1">
+                    <div class="text-2xl font-bold text-blue-600 dark:text-blue-400">+45%</div>
+                    <div class="text-xs text-gray-500 dark:text-gray-400">Revenue Growth</div>
+                </div>
+
+                <div
+                    class="absolute -top-6 -right-6 bg-white dark:bg-gray-800 rounded-xl p-4 shadow-lg border border-gray-100 dark:border-gray-700 w-40 transform -rotate-3">
+                    <div class="text-2xl font-bold text-purple-600 dark:text-purple-400">98%</div>
+                    <div class="text-xs text-gray-500 dark:text-gray-400">Guest Satisfaction</div>
+                </div>
+            </div>
+        </div>
     </div>
-</body>
+</section>
 
-</html>
+<!-- Features Section -->
+<section id="features" class="py-16 sm:py-24 bg-white dark:bg-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+            <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white sm:text-4xl">
+                Powerful Features for <span class="gradient-text">Modern Hotels</span>
+            </h2>
+            <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-600 dark:text-gray-300">
+                Everything you need to manage your hotel efficiently and deliver exceptional guest experiences.
+            </p>
+        </div>
+
+        <div class="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            <!-- Feature 1 -->
+            <div
+                class="feature-card bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300">
+                <div class="w-14 h-14 bg-blue-50 dark:bg-blue-900/30 rounded-xl flex items-center justify-center mb-6">
+                    <i class="fas fa-robot text-2xl text-blue-600 dark:text-blue-400"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white">AI-Powered Analytics</h3>
+                <p class="mt-3 text-gray-600 dark:text-gray-300">
+                    Get actionable insights and predictions to optimize your hotel's performance and guest satisfaction.
+                </p>
+                <div class="mt-4">
+                    <a href="#" class="text-blue-600 dark:text-blue-400 font-medium inline-flex items-center">
+                        Learn more
+                        <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Feature 2 -->
+            <div
+                class="feature-card bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300">
+                <div
+                    class="w-14 h-14 bg-green-50 dark:bg-green-900/30 rounded-xl flex items-center justify-center mb-6">
+                    <i class="fas fa-calendar-check text-2xl text-green-600 dark:text-green-400"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white">Smart Booking</h3>
+                <p class="mt-3 text-gray-600 dark:text-gray-300">
+                    Streamline your reservation process with our intuitive booking system and dynamic pricing tools.
+                </p>
+                <div class="mt-4">
+                    <a href="#" class="text-blue-600 dark:text-blue-400 font-medium inline-flex items-center">
+                        Learn more
+                        <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Feature 3 -->
+            <div
+                class="feature-card bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300">
+                <div
+                    class="w-14 h-14 bg-purple-50 dark:bg-purple-900/30 rounded-xl flex items-center justify-center mb-6">
+                    <i class="fas fa-concierge-bell text-2xl text-purple-600 dark:text-purple-400"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white">Guest Experience</h3>
+                <p class="mt-3 text-gray-600 dark:text-gray-300">
+                    Delight your guests with personalized experiences and seamless communication throughout their stay.
+                </p>
+                <div class="mt-4">
+                    <a href="#" class="text-blue-600 dark:text-blue-400 font-medium inline-flex items-center">
+                        Learn more
+                        <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- AI Assistant Section -->
+<section class="py-16 sm:py-24 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="ai-assistant rounded-3xl p-8 sm:p-12 overflow-hidden relative">
+            <div class="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 -z-10"></div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div
+                        class="inline-block px-4 py-1.5 rounded-full bg-blue-100 dark:bg-blue-900/50 text-blue-800 dark:text-blue-200 text-sm font-medium mb-6">
+                        <span class="flex items-center">
+                            <span class="flex h-2 w-2 relative mr-2">
+                                <span
+                                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                            </span>
+                            AI Assistant
+                        </span>
+                    </div>
+                    <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white sm:text-4xl">
+                        Your 24/7 AI Hotel Concierge
+                    </h2>
+                    <p class="mt-4 text-lg text-gray-600 dark:text-gray-300">
+                        Our intelligent assistant helps you manage bookings, answer guest queries, and optimize
+                        operations with the power of artificial intelligence.
+                    </p>
+                    <div class="mt-8 space-y-4">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mt-1">
+                                <div
+                                    class="flex items-center justify-center h-6 w-6 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400">
+                                    <i class="fas fa-check text-xs"></i>
+                                </div>
+                            </div>
+                            <p class="ml-3 text-base text-gray-700 dark:text-gray-300">
+                                <span class="font-medium">Automated Guest Communication</span> - Handle inquiries and
+                                requests instantly, 24/7.
+                            </p>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mt-1">
+                                <div
+                                    class="flex items-center justify-center h-6 w-6 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400">
+                                    <i class="fas fa-check text-xs"></i>
+                                </div>
+                            </div>
+                            <p class="ml-3 text-base text-gray-700 dark:text-gray-300">
+                                <span class="font-medium">Smart Room Allocation</span> - Optimize room assignments based
+                                on guest preferences and history.
+                            </p>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mt-1">
+                                <div
+                                    class="flex items-center justify-center h-6 w-6 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400">
+                                    <i class="fas fa-check text-xs"></i>
+                                </div>
+                            </div>
+                            <p class="ml-3 text-base text-gray-700 dark:text-gray-300">
+                                <span class="font-medium">Predictive Analytics</span> - Forecast demand and adjust
+                                pricing dynamically.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="mt-8">
+                        <a href="#"
+                            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 shadow-sm">
+                            Try AI Assistant
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div
+                        class="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+                        <div class="p-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                                <div class="ml-2 text-sm text-gray-500 dark:text-gray-400">AI Assistant</div>
+                            </div>
+                        </div>
+                        <div class="p-6 h-96 overflow-y-auto">
+                            <div class="flex mb-4">
+                                <div class="flex-shrink-0 mr-3">
+                                    <div
+                                        class="h-8 w-8 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
+                                        <i class="fas fa-robot text-blue-600 dark:text-blue-400"></i>
+                                    </div>
+                                </div>
+                                <div class="bg-gray-100 dark:bg-gray-700 rounded-lg p-4 max-w-xs">
+                                    <p class="text-sm text-gray-800 dark:text-gray-200">Hello! I'm your AI assistant.
+                                        How can I help you today?</p>
+                                </div>
+                            </div>
+                            <div class="flex justify-end mb-4">
+                                <div class="bg-blue-600 text-white rounded-lg p-4 max-w-xs">
+                                    <p class="text-sm">What's my occupancy rate for next week?</p>
+                                </div>
+                            </div>
+                            <div class="flex mb-4">
+                                <div class="flex-shrink-0 mr-3">
+                                    <div
+                                        class="h-8 w-8 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
+                                        <i class="fas fa-robot text-blue-600 dark:text-blue-400"></i>
+                                    </div>
+                                </div>
+                                <div class="bg-gray-100 dark:bg-gray-700 rounded-lg p-4 max-w-xs">
+                                    <p class="text-sm text-gray-800 dark:text-gray-200">Your projected occupancy rate
+                                        for next week is 78%, which is 12% higher than the same period last month. Would
+                                        you like me to adjust your dynamic pricing strategy to maximize revenue?</p>
+                                </div>
+                            </div>
+                            <div class="flex justify-end">
+                                <div class="flex space-x-2">
+                                    <button
+                                        class="px-3 py-1 text-xs bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 rounded-full">Yes,
+                                        optimize pricing</button>
+                                    <button
+                                        class="px-3 py-1 text-xs bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full">Show
+                                        me the data</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+                            <div class="flex items-center">
+                                <input type="text" placeholder="Ask me anything..."
+                                    class="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white">
+                                <button
+                                    class="px-4 py-2 bg-blue-600 text-white rounded-r-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="absolute -bottom-6 -right-6 w-32 h-32 bg-purple-400/20 rounded-full filter blur-3xl -z-10">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section id="testimonials" class="py-16 sm:py-24 bg-white dark:bg-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+            <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white sm:text-4xl">
+                Trusted by <span class="gradient-text">Industry Leaders</span>
+            </h2>
+            <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-600 dark:text-gray-300">
+                Don't just take our word for it. Here's what our clients say about HotelPro.
+            </p>
+        </div>
+
+        <div class="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Testimonial 1 -->
+            <div
+                class="testimonial-card bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700">
+                <div class="flex items-center mb-6">
+                    <img class="h-12 w-12 rounded-full" src="https://randomuser.me/api/portraits/women/45.jpg"
+                        alt="Sarah Johnson">
+                    <div class="ml-4">
+                        <h4 class="text-lg font-semibold text-gray-900 dark:text-white">Sarah Johnson</h4>
+                        <p class="text-sm text-blue-600 dark:text-blue-400">General Manager, Grand Horizon Hotel</p>
+                    </div>
+                </div>
+                <p class="text-gray-600 dark:text-gray-300 italic">
+                    "HotelPro's AI assistant has transformed how we manage our property. The automated guest
+                    communication alone has saved us over 15 hours per week, and our guest satisfaction scores have
+                    never been higher."
+                </p>
+                <div class="mt-4 flex">
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star text-yellow-400"></i>
+                </div>
+            </div>
+
+            <!-- Testimonial 2 -->
+            <div
+                class="testimonial-card bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700">
+                <div class="flex items-center mb-6">
+                    <img class="h-12 w-12 rounded-full" src="https://randomuser.me/api/portraits/men/32.jpg"
+                        alt="Michael Chen">
+                    <div class="ml-4">
+                        <h4 class="text-lg font-semibold text-gray-900 dark:text-white">Michael Chen</h4>
+                        <p class="text-sm text-blue-600 dark:text-blue-400">Operations Director, Urban Stay Hotels</p>
+                    </div>
+                </div>
+                <p class="text-gray-600 dark:text-gray-300 italic">
+                    "The predictive analytics have been a game-changer for our revenue management. We've seen a 27%
+                    increase in RevPAR since implementing HotelPro's dynamic pricing tools."
+                </p>
+                <div class="mt-4 flex">
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star text-yellow-400"></i>
+                </div>
+            </div>
+
+            <!-- Testimonial 3 -->
+            <div
+                class="testimonial-card bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700">
+                <div class="flex items-center mb-6">
+                    <img class="h-12 w-12 rounded-full" src="https://randomuser.me/api/portraits/women/68.jpg"
+                        alt="Elena Rodriguez">
+                    <div class="ml-4">
+                        <h4 class="text-lg font-semibold text-gray-900 dark:text-white">Elena Rodriguez</h4>
+                        <p class="text-sm text-blue-600 dark:text-blue-400">Owner, Boutique Suites</p>
+                    </div>
+                </div>
+                <p class="text-gray-600 dark:text-gray-300 italic">
+                    "As a small boutique hotel, we needed a solution that could compete with the big chains. HotelPro
+                    gave us enterprise-level tools at a fraction of the cost. The guest experience platform is
+                    exceptional."
+                </p>
+                <div class="mt-4 flex">
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star text-yellow-400"></i>
+                    <i class="fas fa-star-half-alt text-yellow-400"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Logos -->
+        <div class="mt-16 grid grid-cols-2 gap-8 md:grid-cols-4 lg:mt-24">
+            <div class="col-span-1 flex justify-center py-8 px-8 bg-gray-50 dark:bg-gray-800 rounded-2xl">
+                <img class="max-h-12" src="https://tailwindui.com/img/logos/transistor-logo-gray-400.svg"
+                    alt="Transistor">
+            </div>
+            <div class="col-span-1 flex justify-center py-8 px-8 bg-gray-50 dark:bg-gray-800 rounded-2xl">
+                <img class="max-h-12" src="https://tailwindui.com/img/logos/mirage-logo-gray-400.svg" alt="Mirage">
+            </div>
+            <div class="col-span-1 flex justify-center py-8 px-8 bg-gray-50 dark:bg-gray-800 rounded-2xl">
+                <img class="max-h-12" src="https://tailwindui.com/img/logos/statickit-logo-gray-400.svg"
+                    alt="StaticKit">
+            </div>
+            <div class="col-span-1 flex justify-center py-8 px-8 bg-gray-50 dark:bg-gray-800 rounded-2xl">
+                <img class="max-h-12" src="https://tailwindui.com/img/logos/statamic-logo-gray-400.svg" alt="Statamic">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="bg-gradient-to-r from-blue-600 to-blue-800 dark:from-blue-800 dark:to-blue-900 py-16 sm:py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+            <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+                Ready to transform your hotel operations?
+            </h2>
+            <p class="mt-4 text-xl text-blue-100 max-w-3xl mx-auto">
+                Join thousands of hotels that trust HotelPro to streamline their operations, delight guests, and boost
+                revenue with AI-powered tools.
+            </p>
+            <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="{% url 'signup' %}"
+                    class="inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-medium rounded-md text-blue-700 bg-white hover:bg-blue-50 shadow-lg transform hover:-translate-y-1 transition-all duration-200">
+                    Start Your Free Trial
+                    <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+                <a href="#"
+                    class="inline-flex items-center justify-center px-8 py-4 border border-white text-base font-medium rounded-md text-white bg-transparent hover:bg-white/10 transition-colors duration-200">
+                    <i class="fas fa-play-circle mr-2"></i>
+                    Watch Demo
+                </a>
+            </div>
+            <div class="mt-6 text-sm text-blue-100">
+                No credit card required • 14-day free trial • Cancel anytime
+            </div>
+
+            <!-- Stats -->
+            <div class="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-3">
+                <div class="text-center">
+                    <div class="text-4xl font-extrabold text-white">98%</div>
+                    <div class="mt-2 text-blue-100">Customer Satisfaction</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-extrabold text-white">24/7</div>
+                    <div class="mt-2 text-blue-100">AI Support</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-extrabold text-white">45%</div>
+                    <div class="mt-2 text-blue-100">Average Revenue Growth</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="py-16 sm:py-24 bg-white dark:bg-gray-900">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+            <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white sm:text-4xl">
+                Frequently asked questions
+            </h2>
+            <p class="mt-4 text-xl text-gray-600 dark:text-gray-300">
+                Everything you need to know about HotelPro.
+            </p>
+        </div>
+
+        <div class="mt-12 space-y-8">
+            <div class="border-b border-gray-200 dark:border-gray-700 pb-6">
+                <h3 class="text-lg font-medium text-gray-900 dark:text-white">How does the 14-day free trial work?</h3>
+                <div class="mt-2">
+                    <p class="text-gray-600 dark:text-gray-300">
+                        You can try HotelPro free for 14 days. No credit card is required to start your trial. If you
+                        decide HotelPro isn't the right fit, simply cancel before your trial ends and you won't be
+                        charged.
+                    </p>
+                </div>
+            </div>
+
+            <div class="border-b border-gray-200 dark:border-gray-700 pb-6">
+                <h3 class="text-lg font-medium text-gray-900 dark:text-white">Can I import my existing hotel data?</h3>
+                <div class="mt-2">
+                    <p class="text-gray-600 dark:text-gray-300">
+                        Absolutely! We provide easy import tools for your existing guest data, room inventory, and
+                        pricing. Our support team is also available to assist with the migration process.
+                    </p>
+                </div>
+            </div>
+
+            <div class="border-b border-gray-200 dark:border-gray-700 pb-6">
+                <h3 class="text-lg font-medium text-gray-900 dark:text-white">How does the AI assistant work?</h3>
+                <div class="mt-2">
+                    <p class="text-gray-600 dark:text-gray-300">
+                        Our AI assistant uses machine learning to understand and respond to guest inquiries, automate
+                        routine tasks, and provide intelligent recommendations. It learns from your property's data to
+                        provide personalized responses and suggestions.
+                    </p>
+                </div>
+            </div>
+
+            <div class="border-b border-gray-200 dark:border-gray-700 pb-6">
+                <h3 class="text-lg font-medium text-gray-900 dark:text-white">What kind of support do you offer?</h3>
+                <div class="mt-2">
+                    <p class="text-gray-600 dark:text-gray-300">
+                        We offer 24/7 email and chat support to all customers. Our dedicated support team is available
+                        to help with any questions or issues you may have. We also provide comprehensive documentation
+                        and video tutorials.
+                    </p>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-lg font-medium text-gray-900 dark:text-white">Is my data secure?</h3>
+                <div class="mt-2">
+                    <p class="text-gray-600 dark:text-gray-300">
+                        Security is our top priority. We use bank-level encryption for all data in transit and at rest.
+                        Regular security audits and compliance with industry standards ensure your data is always
+                        protected.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

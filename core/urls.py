@@ -5,5 +5,6 @@ urlpatterns=[
     path('features/', views.features, name='features'),
     path('how-it-works/', views.how_it_works, name='how_it_works'),
     path('reviews/', views.reviews_view, name='reviews'),
-    path('sign-up/',include('access_page.urls'))
+    path('sign-up/',include('access_page.urls')),
+    path('customer/',include('customer.urls')),
 ]

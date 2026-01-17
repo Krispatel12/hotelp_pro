@@ -9,6 +9,8 @@ Auth_Choices = [
 class UserRegisterForm(forms.ModelForm):
     confirm_password = forms.CharField(widget=forms.PasswordInput)
     auth_type = forms.ChoiceField(choices=Auth_Choices, widget=forms.Select())
+    email = forms.EmailField(required=False)
+    phone_number = forms.CharField(required=False, max_length=15)
 
     class Meta:
         model = User

@@ -19,18 +19,18 @@
             </p>
         </div>
 
-        <form method="post" action="{% url 'landing' %}" class="mt-8 space-y-6">
+        <form method="post" action="{% url 'login' %}" class="mt-8 space-y-6">
             <!-- Action points to landing temporarily as explicit login view might not be set up in urls.py fully, 
                  or assumes standard form handling. Adapt as needed. -->
             {% csrf_token %}
 
             <div class="rounded-md shadow-sm -space-y-px">
                 <div class="mb-4">
-                    <label for="email-address"
-                        class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email address</label>
-                    <input id="email-address" name="email" type="email" autocomplete="email" required
+                    <label for="username" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email
+                        or Phone Number</label>
+                    <input id="username" name="username" type="text" autocomplete="username" required
                         class="appearance-none rounded-xl relative block w-full px-4 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-                        placeholder="you@example.com">
+                        placeholder="Email or Phone">
                 </div>
                 <div>
                     <label for="password"
@@ -51,7 +51,8 @@
                 </div>
 
                 <div class="text-sm">
-                    <a href="#" class="font-medium text-blue-600 hover:text-blue-500 dark:text-blue-400">
+                    <a href="{% url 'forgetpassword' %}"
+                        class="font-medium text-blue-600 hover:text-blue-500 dark:text-blue-400">
                         Forgot your password?
                     </a>
                 </div>
